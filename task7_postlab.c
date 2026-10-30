@@ -1,18 +1,20 @@
+
 #include <stdio.h>
-int main()
+
+void checkEvenOdd(int n)
 {
-    int n, org, rev, d, i, prime;
-
-    printf("Enter a positive integer: ");
-    scanf("%d", &n);
-
-    org = n;
-    rev = 0;
-
     if (n % 2 == 0)
         printf("The number is even.\n");
     else
         printf("The number is odd.\n");
+}
+
+void checkPalindrome(int n)
+{
+    int org, rev, d;
+
+    org = n;
+    rev = 0;
 
     while (n > 0)
     {
@@ -25,16 +27,21 @@ int main()
         printf("The number is a palindrome.\n");
     else
         printf("The number is not a palindrome.\n");
+}
+
+void checkPrime(int n)
+{
+    int i, prime;
 
     prime = 1;
 
-    if (org <= 1)
+    if (n <= 1)
         prime = 0;
     else
     {
-        for (i = 2; i < org; i++)
+        for (i = 2; i < n; i++)
         {
-            if (org % i == 0)
+            if (n % i == 0)
             {
                 prime = 0;
                 break;
@@ -46,7 +53,18 @@ int main()
         printf("The number is prime.\n");
     else
         printf("The number is not prime.\n");
+}
+
+int main()
+{
+    int n;
+
+    printf("Enter a positive integer: ");
+    scanf("%d", &n);
+
+    checkEvenOdd(n);
+    checkPalindrome(n);
+    checkPrime(n);
 
     return 0;
 }
- return 0; }
