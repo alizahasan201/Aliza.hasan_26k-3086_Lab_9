@@ -1,19 +1,9 @@
 
 #include <stdio.h>
 
-int main()
+float calculateBase(float wt)
 {
-    float wt, dist, base, dc, tot, disc, final;
-    int mem;
-
-    printf("Enter parcel weight in kg: ");
-    scanf("%f", &wt);
-
-    printf("Enter delivery distance in km: ");
-    scanf("%f", &dist);
-
-    printf("Are you a member? (1 for Yes, 0 for No): ");
-    scanf("%d", &mem);
+    float base;
 
     if (wt <= 2)
         base = 200;
@@ -22,18 +12,53 @@ int main()
     else
         base = 700;
 
+    return base;
+}
+
+float calculateDistance(float dist)
+{
+    float dc;
+
     if (dist > 10)
         dc = (dist - 10) * 20;
     else
         dc = 0;
 
-    tot = base + dc;
-    disc = 0;
+    return dc;
+}
 
-    if (mem == 1 && tot > 1000)
-        disc = tot * 0.10;
+float calculateDiscount(float total, int mem)
+{
+    float disc;
 
-    final = tot - disc;
+    if (mem == 1 && total > 1000)
+        disc = total * 0.10;
+    else
+        disc = 0;
+
+    return disc;
+}
+
+int main()
+{
+    float wt, dist, base, dc, total, disc, final;
+    int mem;
+
+    printf("Enter parcel weight in kg: ");
+    scanf("%f", &wt);
+
+    printf("Enter distance in km: ");
+    scanf("%f", &dist);
+
+    printf("Are you a member? (1 Yes, 0 No): ");
+    scanf("%d", &mem);
+
+    base = calculateBase(wt);
+    dc = calculateDistance(dist);
+
+    total = base + dc;
+    disc = calculateDiscount(total, mem);
+    final = total - disc;
 
     printf("\nBase charges: Rs. %.2f\n", base);
     printf("Distance charges: Rs. %.2f\n", dc);
