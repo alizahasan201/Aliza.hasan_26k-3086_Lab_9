@@ -1,6 +1,47 @@
 
 #include <stdio.h>
 
+void showBalance(float bal)
+{
+    printf("Current balance: Rs. %.2f\n", bal);
+}
+
+float depositMoney(float bal, float amo)
+{
+    if (amo > 0)
+    {
+        bal = bal + amo;
+        printf("Deposit successful.\n");
+        printf("Updated balance: Rs. %.2f\n", bal);
+    }
+    else
+        printf("Amount must be positive.\n");
+
+    return bal;
+}
+
+float withdrawMoney(float bal, float amo)
+{
+    if (amo <= 0)
+        printf("Amount must be positive.\n");
+    else if (amo > 10000)
+        printf("Maximum withdrawal is Rs. 10000.\n");
+    else if (amo > bal)
+        printf("Insufficient balance.\n");
+    else
+    {
+        bal = bal - amo;
+
+        printf("Withdrawal successful.\n");
+        printf("Updated balance: Rs. %.2f\n", bal);
+
+        if (bal < 5000)
+            printf("Warning: Low balance!\n");
+    }
+
+    return bal;
+}
+
 int main()
 {
     int choice;
@@ -16,47 +57,26 @@ int main()
         printf("3. Withdraw Money\n");
         printf("4. Exit\n");
 
-        printf("Enter your choice: ");
+        printf("Enter choice: ");
         scanf("%d", &choice);
 
         if (choice == 1)
         {
-            printf("Current balance: Rs. %.2f\n", bal);
+            showBalance(bal);
         }
         else if (choice == 2)
         {
             printf("Enter deposit amount: ");
             scanf("%f", &amo);
 
-            if (amo > 0)
-            {
-                bal = bal + amo;
-                printf("Deposit successful.\n");
-                printf("Updated balance: Rs. %.2f\n", bal);
-            }
-            else
-                printf("Amount must be positive.\n");
+            bal = depositMoney(bal, amo);
         }
         else if (choice == 3)
         {
             printf("Enter withdrawal amount: ");
             scanf("%f", &amo);
 
-            if (amo <= 0)
-                printf("Amount must be positive.\n");
-            else if (amo > 10000)
-                printf("Maximum withdrawal is Rs. 10000.\n");
-            else if (amo > bal)
-                printf("Insufficient balance.\n");
-            else
-            {
-                bal = bal - amo;
-                printf("Withdrawal successful.\n");
-                printf("Updated balance: Rs. %.2f\n", bal);
-
-                if (bal < 5000)
-                    printf("Warning: Low balance!\n");
-            }
+            bal = withdrawMoney(bal, amo);
         }
         else if (choice == 4)
         {
@@ -65,7 +85,7 @@ int main()
         }
         else
         {
-            printf("Invalid choice. Try again.\n");
+            printf("Invalid choice.\n");
         }
     }
 
